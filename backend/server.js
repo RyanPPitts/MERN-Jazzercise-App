@@ -21,8 +21,17 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 const connection = mongoose.connection;
 // once the connection is open its going to log the console log information
 connection.once("open", () => {
-  console.log("mongodb datbase connection is established");
+  console.log("mongodb database connection is established");
 });
+
+// require the files
+const exercisesRouter = require("./routes/exercises");
+const usersRouter = require("./routes/users");
+
+// app.use to use the files
+//  if anyone goes to users - it will load all the users router information
+app.use("/exercises", exercisesRouter);
+app.use("/users", usersRouter);
 
 // this is what starts the server and listens
 app.listen(port, () => {
